@@ -9,7 +9,7 @@ require __DIR__ . '/config-one.php';
 ### بدء تشغيل معلومات قاعدة البيانات من هنا
 require __DIR__  .'/class.pdo.php';
 if(LOCAL) {
-	$DB = new Db('localhost','amani_sms','root', '');
+	$DB = new Db('localhost','amani_sms','root', 'OJOmail1');
 }else{
 	$DB = new Db('localhost','amani_sms','sms', '*AtHuNJ2*$tn@^');
 }
