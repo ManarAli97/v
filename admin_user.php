@@ -1042,7 +1042,7 @@ $(document).on('click','.sms-select',function(){
   ?>
   <div class="container">
     <h5> الارقام الاثير التي لم تصلها رسائل الواتساب </h5>
-    <div class="row d-flex justify-content-centerس">
+    <div class="row d-flex justify-content-center">
       <ul class="responsive-table">
         <li class="table-header">
           <div class="col col-md-3"> التسلسل</div>
@@ -1050,7 +1050,7 @@ $(document).on('click','.sms-select',function(){
           <div class="col col-md-3">  القسم </div>
           <div class="col col-md-3"> التاريخ</div>
         </li>
-        <?php $whatsapp = $DB->query("SELECT `phone`,`fkvote` ,`created` FROM `phone_whats` WHERE `deleted` = 0 AND `send_status` = 0 AND `phone` like '%78%'  order by `id` desc");
+        <?php $whatsapp = $DB->query("SELECT `phone`,`fkvote` ,`created` FROM `phone_whats` WHERE `deleted` = 0 AND `send_status` = 0 AND `phone` like '78%'  order by `id` desc");
           foreach ($whatsapp as $key => $value){
             $index = $key + 1;
             $vote = $DB->query("SELECT `title` FROM `vote` limit 1");
