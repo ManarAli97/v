@@ -289,12 +289,14 @@ $users = $DB->query("Select * from `user` WHERE `deleted` = 0  order by `id` des
 
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <a class="btn btn-warning w160 m-2" href="/v/cp/user/">عرض المستخدمين</a>
-    <a class="btn btn-warning w150 m-2" href="/v/cp/user/new-user/">اضافة جديد</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/">عرض المستخدمين</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/new-user/">اضافة جديد</a>
     |
-    <a class="btn btn-warning w150 m-2" href="/v/cp/user/report-phone/">تقرير التصويت</a>
-    <a class="btn btn-warning w150 m-2" href="/v/cp/user/show-vote/">أقسام التصويت</a>
-    <a class="btn btn-warning w150 m-2" href="/v/cp/user/new-phone/">اضافة رقم هاتف</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/report-phone/">تقرير التصويت</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/show-vote/">أقسام التصويت</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/new-phone/">اضافة رقم هاتف</a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/whatsapp-phone/"> تقرير الواتساب </a>
+    <a class="btn btn-warning w140 m-2" href="/v/cp/user/zain-phone/"> تقرير ارقام الاثير  </a>
   </div>
 </div>
 <br>
@@ -1004,6 +1006,69 @@ $(document).on('click','.sms-select',function(){
 </script>
 <?php } ?>
 
+<?php if('whatsapp-phone' == $section_id){
+   $index = 0;
+  ?>
+  <div class="container">
+    <h5> الارقام التي لم تصلها رسائل الواتساب </h5>
+    <div class="row d-flex justify-content-center">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-md-3"> التسلسل</div>
+          <div class="col col-md-3">رقم الهاتف</div>
+          <div class="col col-md-3">  القسم </div>
+          <div class="col col-md-3"> التاريخ</div>
+        </li>
+        <?php $whatsapp = $DB->query("SELECT `phone`,`fkvote` ,`created` FROM `phone_whats` WHERE `deleted` = 0 AND `send_status` = 0  order by `id` desc");
+          foreach ($whatsapp as $key => $value){
+            $index = $key + 1;
+            $vote = $DB->query("SELECT `title` FROM `vote` limit 1");
+            $value['fkvote'] = $vote[0]['title'];
+          ?>
+          <li data-aos="fade-up" data-aos-duration="<?=($key+2)?>00" class="table-row">
+            <div class="col col-md-3" data-label="التسلسل"><?=$index?></div>
+            <div class="col col-md-3" data-label="رقم الهاتف"><?=$value['phone']?></div>
+            <div class="col col-md-3" data-label="القسم"><?=$value['fkvote']?></div>
+            <div class="col col-md-3" data-label="التاريخ"><?=date('Y-m-d',$value['created'])?></div>
+          </li>
+        <?php } ?>
+      </ul>
+    </div>
+  </div>
+<?php } ?>
+
+<?php if('zain-phone' == $section_id){
+   $index = 0;
+  ?>
+  <div class="container">
+    <h5> الارقام الاثير التي لم تصلها رسائل الواتساب </h5>
+    <div class="row d-flex justify-content-centerس">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-md-3"> التسلسل</div>
+          <div class="col col-md-3">رقم الهاتف</div>
+          <div class="col col-md-3">  القسم </div>
+          <div class="col col-md-3"> التاريخ</div>
+        </li>
+        <?php $whatsapp = $DB->query("SELECT `phone`,`fkvote` ,`created` FROM `phone_whats` WHERE `deleted` = 0 AND `send_status` = 0 AND `phone` like '%78%'  order by `id` desc");
+          foreach ($whatsapp as $key => $value){
+            $index = $key + 1;
+            $vote = $DB->query("SELECT `title` FROM `vote` limit 1");
+            $value['fkvote'] = $vote[0]['title'];
+          ?>
+          <li data-aos="fade-up" data-aos-duration="<?=($key+2)?>00" class="table-row">
+            <div class="col col-md-3" data-label="التسلسل"><?=$index?></div>
+            <div class="col col-md-3" data-label="رقم الهاتف"><?=$value['phone']?></div>
+            <div class="col col-md-3" data-label="القسم"><?=$value['fkvote']?></div>
+            <div class="col col-md-3" data-label="التاريخ"><?=date('Y-m-d',$value['created'])?></div>
+          </li>
+        <?php } ?>
+      </ul>
+    </div>
+  </div>
+<?php } ?>
+
+
 
 <?php if('new-phone' == $section_id){ ?>
 <div class="container">
@@ -1103,6 +1168,10 @@ $(document).on('click','.sms-select',function(){
     </div>
   </div>
 </div>
+
+
+
+
 
 <script type="text/javascript">
 
