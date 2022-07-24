@@ -1,0 +1,92 @@
+<Files php.ini>
+order allow,deny
+deny from all
+</Files>
+#
+#for block any page except index.php&err.php add in 27-03-2018
+<Files *.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files ~ "^(index|page_err)\.php$">
+    Order Allow,Deny
+    Allow from all
+</Files>
+#
+#for error redirect add in 28-03-2018 08:50 AM
+ErrorDocument 401 /page_err.php
+ErrorDocument 403 /page_err.php
+ErrorDocument 404 /page_err.php
+ErrorDocument 500 /page_err.php
+# updated: 7/8/15 2:59 AM, uploaded: 7/8/15 3:00 AM
+AddDefaultCharset utf-8
+Options -Indexes
+ServerSignature Off
+RewriteEngine On
+RewriteRule ^\.htaccess$ - [F]
+# 8/28/16 5:10 AM
+RewriteRule ^1captcha/$ class-captcha.php [L]
+# 8/17/16 3:09 AM
+RewriteRule ^question/answer/?$ questions.php?action=answer [L]
+RewriteRule ^download/(video|photo|publication)/([0-9]+)$ set-download.php?cat_id=$1&post_id=$2 [L]
+RewriteRule ^([a-z]+)/search/(.*)/(page-)?([0-9]+)?$ index.php?lid=$1&s_page=search&q=$2&pid=$4 [L]
+#
+##for redirect to index.php
+RewriteRule ^(cp)?/?(moder)?/?([a-z-]+)?/?([a-z-]+)?/?([0-9]+)?/?(page-)?([0-9]+)?/?([a-z-]+)?/?$ index.php?moder=$1&s_page=$2&cat_id=$3&section_id=$4&id=$5&pid=$7&pagespeed=$8 [QSA,L]
+#
+##for cash add in 28-03-2018 08:37 AM
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault          A3
+  ExpiresByType image/x-icon      A29030400
+  ExpiresByType application/javascript    A29030400
+  ExpiresByType application/x-javascript    A29030400
+  ExpiresByType text/css        A29030400
+  ExpiresByType image/gif        A29030400
+  ExpiresByType image/png        A29030400
+  ExpiresByType image/jpeg      A29030400
+  ExpiresByType application/x-troff    A29030400
+  ExpiresByType application/pdf      A29030400
+  ExpiresByType image/svg+xml         A29030400
+  ExpiresByType image/svg           A29030400
+</IfModule>
+
+
+
+##
+### for css,js commpresion from gtmetrix
+<IfModule mod_deflate.c>
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE font/opentype
+  AddOutputFilterByType DEFLATE font/otf
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+
+  # Remove browser bugs (only needed for really old browsers)
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  Header append Vary User-Agent
+</IfModule>
+
+#
+#for correct css,js  and other files path add in 28-03-2018 09:00 AM
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d

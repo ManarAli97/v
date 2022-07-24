@@ -1,0 +1,26 @@
+@font-face{font-family:'dinar';font-style: normal;font-weight: 300;src:url(GE_Dinar_One_Medium.otf) format('woff2');font-display:swap;}
+@font-face{font-family:'kufi';font-style: normal;font-weight: 300;src:url(DroidKufi-Regular.woff2) format('woff2');font-display:swap;}
+@font-face{font-family:'general';src:url(samim.woff) format('woff');font-style: normal;font-weight:300;font-display:swap;}
+@font-face{font-family:'hura';src:url(alhurra.ttf) format('ttf');}
+html,body{direction:rtl;}/*4EA770 to 6d0404*/
+body{font-family:'Droid Arabic Naskh','general',Arial!important;color:#111;font-size:.938em;line-height:190%!important;}
+.disf {display:flex;}
+a{color:#0488e5;transition: background-color 0.14s ease-in-out, color 0.14s ease-in-out, border-bottom-color 0.14s ease-in-out;}
+a:hover{color:#222;}
+h1,h2,h3,h4{line-height:150%!important;}
+h1,h2,h3,h4,h5,h6,.hfont,.title,nav.menu,.nav a,.head,.main-nav,.bg-ad,.news{font-family:'Droid Arabic kufi','kufi',arial!important;}
+h1{text-align: center;}
+.bg1,.stat span{background-color:#0d47a1 !important; color:#eee !important;}
+.bg1 a{color:#eee;}
+.bg04{background:rgba(31, 31, 31, 0.4) none repeat scroll 0 0 !important;}
+.bgw{background-color:#fff!important;}
+.color1{color:#208173 !important;}
+.color2,.callpage h4,form.askari input[type="submit"],.action-bar-link:hover{color:#eeb351 !important;}
+.color2 a.color2{color:#01826e}
+.color2 a:hover{color:#eeb351 !important;}
+a:hover .arrowleft:after, a:hover .arrowtop:after, a:hover .arrowbottom:after, a:hover .arrowright:after {
+		border-top: 0.14em solid #e74c3c;
+		border-right: 0.14em solid #e74c3c;
+}
+
+/* start website */
